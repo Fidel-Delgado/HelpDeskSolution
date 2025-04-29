@@ -1,0 +1,97 @@
+﻿@using SoporteTI.Application.Helpers
+@model IEnumerable<SoporteTI.Application.DTOs.TicketDto>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>
+    Ticket Management
+
+</h1>
+
+<div class="col-12 mb-5">
+<a asp-action="Create" class="btn btn-primary">Create New</a>
+</div>
+<div class="table table-responsive">
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_Folio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_Reason)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_CreatedById)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_AssignedToId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_StatusId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_ImpactId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tk_PriorityId)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tk_Folio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tk_Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tk_Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tk_Reason)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tk_CreatedById)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tk_AssignedToId)
+                    </td>
+                    <td>
+                        @EnumDropdownHelper.GetStatusTicketbyId(Convert.ToString(item.Tk_StatusId)).Text
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tk_CreatedDate)
+                    </td>
+                    <td>
+                        @EnumDropdownHelper.GetImpactTicketbyId(Convert.ToString(item.Tk_ImpactId)).Text
+                    </td>
+                    <td>
+                        @EnumDropdownHelper.GetPriorityTicketbyId(Convert.ToString(item.Tk_PriorityId)).Text
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { Tk_Folio = item.Tk_Folio }, new { @class = "btn btn-outline-warning" }) |
+                        @* @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | *@
+                        @Html.ActionLink("Delete", "Delete", new { Tk_Folio = item.Tk_Folio }, new { @class = "btn btn-outline-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

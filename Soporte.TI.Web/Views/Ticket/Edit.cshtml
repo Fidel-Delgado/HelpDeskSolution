@@ -1,0 +1,73 @@
+﻿@model SoporteTI.Application.DTOs.TicketDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="card">
+    <div class="card-body">
+
+        <h1>Edit Ticket</h1>
+        
+        <hr />
+
+        <form asp-action="Edit" class="row" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Tk_CreatedDate" />
+
+            <div class="col-lg-4">
+                <label asp-for="Tk_Folio" class="control-label"></label>
+                <input asp-for="Tk_Folio" class="form-control" readonly />
+                <span asp-validation-for="Tk_Folio" class="text-danger"></span>
+            </div>
+
+            <div class="col-lg-12">
+                <label asp-for="Tk_Title" class="control-label"></label>
+                <input asp-for="Tk_Title" class="form-control" />
+                <span asp-validation-for="Tk_Title" class="text-danger"></span>
+            </div>
+            <div class="col-lg-12">
+                <label asp-for="Tk_Description" class="control-label"></label>
+                <input asp-for="Tk_Description" class="form-control" />
+                <span asp-validation-for="Tk_Description" class="text-danger"></span>
+            </div>
+            <div class="col-lg-12">
+                <label asp-for="Tk_Reason" class="control-label"></label>
+                <input asp-for="Tk_Reason" class="form-control" />
+                <span asp-validation-for="Tk_Reason" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4">
+                <label asp-for="Tk_StatusId" class="control-label"></label>
+                <select asp-for="Tk_StatusId" class="form-control" asp-items="@(new SelectList(ViewBag.Status, "Value", "Text",1))" disabled>
+                </select>
+                <span asp-validation-for="Tk_StatusId" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4">
+                <label asp-for="Tk_ImpactId" class="control-label"></label>
+                <select asp-for="Tk_ImpactId" class="form-control" asp-items="@(new SelectList(ViewBag.Impact, "Value", "Text"))">
+                    <option value="">Select an option</option>
+                </select>
+                <span asp-validation-for="Tk_ImpactId" class="text-danger"></span>
+            </div>
+            <div class="col-lg-4">
+                <label asp-for="Tk_PriorityId" class="control-label"></label>
+                <select asp-for="Tk_PriorityId" class="form-control" asp-items="@(new SelectList(ViewBag.Priority, "Value", "Text"))">
+                    <option value="">Select an option</option>
+                </select>
+                <span asp-validation-for="Tk_PriorityId" class="text-danger"></span>
+            </div>
+            
+            <div class="col-lg-12 mt-2">
+                <hr />
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-action="Index" asp-controller="Ticket" asp-action="Index" class="btn btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
